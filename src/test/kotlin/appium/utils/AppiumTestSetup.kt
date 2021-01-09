@@ -15,19 +15,20 @@ import java.util.concurrent.TimeUnit
 open class AppiumTestSetup : FluentTest() {
 
     private val device: Device = Android()
+    private val appiumServerUrl: String? = PropertiesReader().getProp("appium.server.url")
 
     override fun newWebDriver(): WebDriver {
-        log.info("Running test on Appium server {} using {}", PropertiesReader().getAppiumServerUrl(), device)
+        log.info("Running test on Appium server {} using {}", appiumServerUrl, device)
         return runTestOnAppiumServer()
     }
 
     private fun runTestOnAppiumServer(): WebDriver {
         try {
-            val appiumDriver = AppiumDriver<WebElement>(URL(PropertiesReader().getAppiumServerUrl()), capabilities)
+            val appiumDriver = AppiumDriver<WebElement>(URL(appiumServerUrl), capabilities)
             appiumDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS)
             return appiumDriver
         } catch (e: MalformedURLException) {
-            throw ConfigException("Invalid hub location: " + PropertiesReader().getAppiumServerUrl(), e)
+            throw ConfigException("Invalid hub location: $appiumServerUrl", e)
         }
     }
 

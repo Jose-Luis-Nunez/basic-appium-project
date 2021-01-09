@@ -7,6 +7,7 @@ import io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME
 import org.openqa.selenium.Capabilities
 import org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME
 import org.openqa.selenium.remote.DesiredCapabilities
+import java.io.File
 
 class Android : Device {
 
@@ -20,7 +21,7 @@ class Android : Device {
         }
     }
 
-    override fun getTestAppPath(): String? {
-        return PropertiesReader().readAppPathFromProperty("android.app.path")
+    override fun getTestAppPath(): String {
+        return File(PropertiesReader().getProp("android.app.path") as String).absolutePath
     }
 }
