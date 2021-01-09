@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.4.20-M1"
 }
 
 group = "me.josenunez"
@@ -16,7 +16,6 @@ dependencies {
     val fluentleniumVersion = "4.3.1"
     val seleniumVersion = "3.141.59"
     val assertjVersion = "3.6.1"
-    val assertKVersion = "0.22"
     val appiumVersion = "7.4.1"
     val jUnitVersion = "5.5.2"
 
@@ -59,6 +58,11 @@ dependencies {
         group = "io.strikt",
         name = "strikt-core",
         version = "0.27.0"
+    )
+    testImplementation(
+            group = "org.jetbrains.kotlin",
+            name = "kotlin-reflect",
+            version = "1.4.20-M1"
     )
     implementation(kotlin("stdlib-jdk8"))
 }
