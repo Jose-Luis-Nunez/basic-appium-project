@@ -17,18 +17,13 @@ dependencies {
     val seleniumVersion = "3.141.59"
     val assertjVersion = "3.6.1"
     val assertKVersion = "0.22"
-    val appiumVersion = "7.0.0"
+    val appiumVersion = "7.4.1"
     val jUnitVersion = "5.5.2"
 
     testImplementation(
         group = "org.junit.jupiter",
         name = "junit-jupiter",
         version = jUnitVersion
-    )
-    implementation(
-        group = "com.willowtreeapps.assertk",
-        name = "assertk",
-        version = assertKVersion
     )
     testImplementation(
         group = "org.assertj",
