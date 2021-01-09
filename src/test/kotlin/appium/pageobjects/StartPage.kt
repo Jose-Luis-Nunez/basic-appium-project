@@ -1,10 +1,9 @@
 package appium.pageobjects
 
 import io.appium.java_client.pagefactory.AndroidFindBy
-import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.FluentWebElement
 
-class StartPage : FluentPage() {
+class StartPage : AbstractScreen() {
     @AndroidFindBy(id = "tv_beer")
     private lateinit var itemName: FluentWebElement
 
@@ -31,20 +30,14 @@ class StartPage : FluentPage() {
     }
 
     private fun addBeer() {
-        addBeerButton.click()
+        clickOnElement(addBeerButton)
     }
 
     fun insertNewPrice(newPrice: String) {
-        with(price) {
-            click()
-            clear()
-            write(newPrice)
-        }
+        price.type(newPrice)
     }
 
     fun getAmount() = getText(amount).toInt()
 
     fun getTotalPrice() = getText(totalPrice).replace("[^0-9]".toRegex(), "").toInt()
-
-    private fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()
 }
