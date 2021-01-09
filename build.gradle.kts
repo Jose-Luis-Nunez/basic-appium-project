@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    val fluentleniumVersion = "4.3.1"
+    val fluentleniumVersion = "4.5.1"
     val seleniumVersion = "3.141.59"
     val assertjVersion = "3.6.1"
     val appiumVersion = "7.4.1"

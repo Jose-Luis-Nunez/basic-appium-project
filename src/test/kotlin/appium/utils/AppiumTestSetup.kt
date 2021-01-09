@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit
 
 open class AppiumTestSetup : FluentTest() {
 
-    private lateinit var appiumDriver: AppiumDriver<*>
-
     private val device: Device = Android()
 
     override fun newWebDriver(): WebDriver {
@@ -25,7 +23,7 @@ open class AppiumTestSetup : FluentTest() {
 
     private fun runTestOnAppiumServer(): WebDriver {
         try {
-            appiumDriver = AppiumDriver<WebElement>(URL(PropertiesReader().getAppiumServerUrl()), capabilities)
+            val appiumDriver = AppiumDriver<WebElement>(URL(PropertiesReader().getAppiumServerUrl()), capabilities)
             appiumDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS)
             return appiumDriver
         } catch (e: MalformedURLException) {
