@@ -26,11 +26,9 @@ class StartPage : AbstractScreen() {
     private lateinit var fab: FluentWebElement
 
     fun addBeers(amount: Int) {
-        for (i in 2..amount) addBeer()
-    }
-
-    private fun addBeer() {
-        clickOnElement(addBeerButton)
+        for (i in 2..amount) {
+            clickOnElement(addBeerButton)
+        }
     }
 
     fun insertNewPrice(newPrice: String) {
@@ -39,5 +37,5 @@ class StartPage : AbstractScreen() {
 
     fun getAmount() = getText(amount).toInt()
 
-    fun getTotalPrice() = getText(totalPrice).replace("[^0-9]".toRegex(), "").toInt()
+    fun getTotalPrice() = getText(totalPrice).replace("[^0-9]€".toRegex(), "")
 }

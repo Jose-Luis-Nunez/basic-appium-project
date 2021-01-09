@@ -74,7 +74,7 @@ abstract class AbstractScreen : FluentPage() {
         element.click()
     }
 
-    protected fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()
+    protected fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()!!
 
     protected fun waitUntilElementPresent(element: FluentWebElement) {
         await().atMost(30, TimeUnit.SECONDS).until(element).present()
