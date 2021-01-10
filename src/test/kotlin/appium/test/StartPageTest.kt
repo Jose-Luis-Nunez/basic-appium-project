@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import strikt.api.expect
 import strikt.assertions.isEqualTo
 
-
 class StartPageTest : AppiumTestSetup() {
 
     @Page
