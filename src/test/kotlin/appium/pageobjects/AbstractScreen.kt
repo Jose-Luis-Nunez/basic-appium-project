@@ -10,6 +10,7 @@ import io.appium.java_client.touch.offset.PointOption.point
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.WebDriverException
+import org.openqa.selenium.html5.Location
 import java.time.Duration.ofMillis
 import java.util.concurrent.TimeUnit
 
@@ -59,7 +60,7 @@ abstract class AbstractScreen : FluentPage() {
     class PlatformTouchAction(performsTouchActions: PerformsTouchActions) :
             TouchAction<PlatformTouchAction>(performsTouchActions)
 
-    protected fun hideKeyBoard() {
+    fun hideKeyBoard() {
         (driver as AppiumDriver<*>).hideKeyboard()
     }
 
@@ -72,50 +73,63 @@ abstract class AbstractScreen : FluentPage() {
         hideKeyBoard()
     }
 
-    protected fun clickOnElement(element: FluentWebElement) {
+    fun clickOnElement(element: FluentWebElement) {
         waitUntilElementPresent(element)
         element.click()
     }
+    
+    fun clickOnElementWhenClickable(element: FluentWebElement) {
+        waitUntilElementClickable(element)
+        element.click()
+    }
 
-    protected fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()!!
+    fun openLink(url: String) {
+        (driver as AppiumDriver<*>).get(url)
+    }
 
-    protected fun waitUntilElementPresent(element: FluentWebElement) {
+    fun setDeviceLocation(latitude: Double, longitude: Double, altitude: Double) {
+        (driver as AppiumDriver<*>).setLocation(Location(latitude, longitude, altitude))
+    }
+
+    fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()!!
+
+    fun waitUntilElementPresent(element: FluentWebElement) {
         await().atMost(30, TimeUnit.SECONDS).until(element).present()
     }
 
-    protected fun waitUntilElementPresent(element: FluentWebElement, wait: Long) {
+    fun waitUntilElementPresent(element: FluentWebElement, wait: Long) {
         await().atMost(wait, TimeUnit.SECONDS).until(element).present()
     }
 
-    protected fun waitUntilElementNotPresent(element: FluentWebElement) {
+    fun waitUntilElementNotPresent(element: FluentWebElement) {
         await().atMost(10, TimeUnit.SECONDS).until(element).not().present()
     }
 
-    protected fun waitUntilElementDisplayed(element: FluentWebElement) {
+    fun waitUntilElementDisplayed(element: FluentWebElement) {
         await().atMost(30, TimeUnit.SECONDS).until(element).displayed()
     }
 
-    protected fun waitUntilElementDisplayed(element: FluentWebElement, wait: Long) {
+    fun waitUntilElementDisplayed(element: FluentWebElement, wait: Long) {
         await().atMost(wait, TimeUnit.SECONDS).until(element).displayed()
     }
 
-    protected fun waitUntilElementNotDisplayed(element: FluentWebElement) {
+    fun waitUntilElementNotDisplayed(element: FluentWebElement) {
         await().atMost(10, TimeUnit.SECONDS).until(element).not().displayed()
     }
 
-    protected fun waitUntilElementClickable(element: FluentWebElement) {
+    fun waitUntilElementClickable(element: FluentWebElement) {
         await().atMost(30, TimeUnit.SECONDS).until(element).clickable()
     }
 
-    protected fun waitUntilElementNotContainsText(element: FluentWebElement, text: String) {
+    fun waitUntilElementNotContainsText(element: FluentWebElement, text: String) {
         await().atMost(10, TimeUnit.SECONDS).until(element).text().not().contains(text)
     }
 
-    protected fun waitUntilElementContainsText(element: FluentWebElement, text: String) {
+    fun waitUntilElementContainsText(element: FluentWebElement, text: String) {
         await().atMost(10, TimeUnit.SECONDS).until(element).text().contains(text)
     }
 
-    protected fun swipeScreen(direction: Direction) {
+    fun swipeScreen(direction: Direction) {
         println("swipeScreen(): dir: '$direction'") // always log your actions
 
         val animationTime = 200L // ms
@@ -150,6 +164,16 @@ abstract class AbstractScreen : FluentPage() {
             Thread.sleep(animationTime)
         } catch (e: InterruptedException) {
         }
+    }
+
+    fun hideNavigationBar() {
+        val example = listOf("overscan", "0,0,0,-202")
+        val adbCommand = mapOf("command" to "wm", "args" to example)
+        (driver as AppiumDriver<*>).executeScript("mobile: shell", adbCommand)
+    }
+
+    fun removeWhiteSpacesFromString(str: String): String {
+        return str.replace("\\s".toRegex(), "")
     }
 
     enum class Direction {

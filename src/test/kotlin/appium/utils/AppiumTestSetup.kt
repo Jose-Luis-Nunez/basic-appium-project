@@ -2,9 +2,15 @@ package appium.utils
 
 import appium.config.ConfigException
 import appium.device.Android
-import appium.device.Device
+import appium.device.Platform
 import io.appium.java_client.AppiumDriver
 import org.fluentlenium.adapter.junit.jupiter.FluentTest
+import org.fluentlenium.assertj.FluentLeniumAssertions
+import org.fluentlenium.assertj.custom.FluentListAssert
+import org.fluentlenium.assertj.custom.FluentWebElementAssert
+import org.fluentlenium.core.FluentPage
+import org.fluentlenium.core.domain.FluentList
+import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.slf4j.LoggerFactory
@@ -14,11 +20,11 @@ import java.util.concurrent.TimeUnit
 
 open class AppiumTestSetup : FluentTest() {
 
-    private val device: Device = Android()
+    private val platform: Platform = Android()
     private val appiumServerUrl: String? = PropertiesReader().getProp("appium.server.url")
 
     override fun newWebDriver(): WebDriver {
-        log.info("Running test on Appium server {} using {}", appiumServerUrl, device)
+        log.info("Running test on Appium server {} using {}", appiumServerUrl, platform)
         return runTestOnAppiumServer()
     }
 
@@ -32,9 +38,29 @@ open class AppiumTestSetup : FluentTest() {
         }
     }
 
-    override fun getCapabilities() = device.getCapabilities()!!
+    override fun getCapabilities() = platform.getCapabilities()!!
 
     companion object {
         private val log = LoggerFactory.getLogger(AppiumTestSetup::class.java)
+    }
+
+    inline operator fun <reified T : FluentPage> T.invoke(func: T.() -> Unit) = with(T::class) {
+        apply { func() }
+    }
+
+    fun FluentWebElement.assertThat(init: FluentWebElementAssert.() -> Unit) {
+        FluentLeniumAssertions.assertThat(this).init()
+    }
+
+    fun FluentList<FluentWebElement>.assert(init: FluentListAssert.() -> Unit) {
+        FluentLeniumAssertions.assertThat(this).init()
+    }
+
+    operator fun FluentWebElement.invoke(init: FluentWebElementAssert.() -> Unit) {
+        FluentLeniumAssertions.assertThat(this).init()
+    }
+
+    fun assertThat(func: FluentPage.() -> Unit = {}) {
+        FluentPage().func()
     }
 }

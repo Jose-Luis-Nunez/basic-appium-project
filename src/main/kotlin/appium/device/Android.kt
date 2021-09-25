@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME
 import org.openqa.selenium.remote.DesiredCapabilities
 import java.io.File
 
-class Android : Device {
+class Android : Platform {
 
     override fun getCapabilities(): Capabilities? {
         return DesiredCapabilities().apply {
