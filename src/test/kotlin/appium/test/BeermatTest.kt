@@ -56,15 +56,6 @@ class BeermatTest : AppiumTestSetup() {
     }
 
     @Test
-    fun checkMaxSnackBarUpdateForAddingBeers() {
-        beermat {
-            addBeers(37)
-        }
-
-        assertThat(beermat.getSnackBarText()).contains("cirrhosis")
-    }
-
-    @Test
     fun checkSnackBarUpdateForDeletingBeers() {
         beermat {
             addBeers(2)
@@ -81,41 +72,5 @@ class BeermatTest : AppiumTestSetup() {
         }
 
         assertThat(beermat.getDrinkName()).contains("Cola")
-    }
-
-    @Test
-    fun checkTextField2() {
-        beermat {
-            enterDrinkName("Cola")
-        }
-
-        assertThat(beermat.getDrinkName()).contains("Cola")
-    }
-
-    @Test
-    fun checkTextField3() {
-        beermat {
-            enterDrinkName("Cola")
-        }
-
-        assertThat(beermat.getDrinkName()).contains("Cola")
-    }
-
-    @Test
-    fun checkTextFieldForFood() {
-        beermat {
-            enterDrinkName("Doener")
-        }
-
-        assertThat(beermat.getDrinkName()).contains("Doener")
-    }
-
-    @Test
-    fun checkTextFieldForFood2() {
-        beermat {
-            enterDrinkName("Doener")
-        }
-
-        assertThat(beermat.getDrinkName()).contains("Doener")
     }
 }
