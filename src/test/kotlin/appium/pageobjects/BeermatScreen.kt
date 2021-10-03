@@ -3,7 +3,7 @@ package appium.pageobjects
 import io.appium.java_client.pagefactory.AndroidFindBy
 import org.fluentlenium.core.domain.FluentWebElement
 
-class Beermat : AbstractScreen() {
+class BeermatScreen : AbstractScreen() {
     @AndroidFindBy(id = "tv_beer")
     private lateinit var itemName: FluentWebElement
 
@@ -31,6 +31,12 @@ class Beermat : AbstractScreen() {
     fun addBeers(amount: Int) {
         for (i in 2..amount) {
             clickOnElement(addBeerButton)
+        }
+    }
+
+    fun deleteBeers(amount: Int) {
+        for (i in 1..amount) {
+            clickOnElement(removeBeerButton)
         }
     }
 

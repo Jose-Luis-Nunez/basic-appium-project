@@ -1,7 +1,7 @@
 package appium.test
 
 import appium.utils.AppiumTestSetup
-import appium.pageobjects.Beermat
+import appium.pageobjects.BeermatScreen
 import org.fluentlenium.core.annotation.Page
 import org.junit.jupiter.api.Test
 import strikt.api.expect
@@ -11,7 +11,7 @@ import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 class BeermatTest : AppiumTestSetup() {
 
     @Page
-    lateinit var beermat: Beermat
+    lateinit var beermat: BeermatScreen
 
     @Test
     fun checkPriceForSpecificAmountOfBeers() {
@@ -30,11 +30,21 @@ class BeermatTest : AppiumTestSetup() {
     }
 
     @Test
-    fun checkSnackBarUpdate() {
+    fun checkSnackBarUpdateForAddingBeers() {
         beermat {
             addBeers(16)
         }
 
-       assertThat(beermat.getSnackBarText()).contains("drunk")
+        assertThat(beermat.getSnackBarText()).contains("drunk")
+    }
+
+    @Test
+    fun checkSnackBarUpdateForDeletingBeers() {
+        beermat {
+            addBeers(2)
+            deleteBeers(2)
+        }
+
+        assertThat(beermat.getSnackBarText()).contains("Booo")
     }
 }
