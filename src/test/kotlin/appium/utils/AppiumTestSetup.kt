@@ -18,23 +18,24 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
+private const val APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub"
+
 open class AppiumTestSetup : FluentTest() {
 
     private val platform: Platform = Android()
-    private val appiumServerUrl: String? = PropertiesReader().getProp("appium.server.url")
 
     override fun newWebDriver(): WebDriver {
-        log.info("Running test on Appium server {} using {}", appiumServerUrl, platform)
+        log.info("Running test on Appium server {} using {}", APPIUM_SERVER_URL, platform)
         return runTestOnAppiumServer()
     }
 
     private fun runTestOnAppiumServer(): WebDriver {
         try {
-            val appiumDriver = AppiumDriver<WebElement>(URL(appiumServerUrl), capabilities)
-            appiumDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS)
+            val appiumDriver = AppiumDriver<WebElement>(URL(APPIUM_SERVER_URL), capabilities)
+            appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
             return appiumDriver
         } catch (e: MalformedURLException) {
-            throw ConfigException("Invalid hub location: $appiumServerUrl", e)
+            throw ConfigException("Invalid hub location: $APPIUM_SERVER_URL", e)
         }
     }
 

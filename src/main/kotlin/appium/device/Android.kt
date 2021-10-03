@@ -30,6 +30,7 @@ class Android : Platform {
     }
 
     override fun getTestAppPath(): String {
-        return File(PropertiesReader().getProp("android.app.path") as String).absolutePath
+        val appFilePath = File(PropertiesReader().getProp("android.app.path") as String)
+        return appFilePath.absolutePath
     }
 }

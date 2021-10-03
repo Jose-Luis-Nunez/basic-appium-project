@@ -64,6 +64,11 @@ dependencies {
             name = "kotlin-reflect",
             version = "1.4.20-M1"
     )
+    testImplementation(
+            group = "io.rest-assured",
+            name = "rest-assured",
+            version = "4.4.0"
+    )
     implementation(kotlin("stdlib-jdk8"))
 }
 

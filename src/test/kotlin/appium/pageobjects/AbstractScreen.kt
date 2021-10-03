@@ -1,6 +1,8 @@
 package appium.pageobjects
 
 import appium.pageobjects.AbstractScreen.Direction.*
+import appium.utils.CityUtils
+import appium.utils.CityUtils.*
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.PerformsTouchActions
 import io.appium.java_client.TouchAction
@@ -87,8 +89,8 @@ abstract class AbstractScreen : FluentPage() {
         (driver as AppiumDriver<*>).get(url)
     }
 
-    fun setDeviceLocation(latitude: Double, longitude: Double, altitude: Double) {
-        (driver as AppiumDriver<*>).setLocation(Location(latitude, longitude, altitude))
+    fun setDeviceLocation(city: City) {
+        (driver as AppiumDriver<*>).setLocation(Location(city.latitude, city.longitude, city.altitude))
     }
 
     fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()!!
