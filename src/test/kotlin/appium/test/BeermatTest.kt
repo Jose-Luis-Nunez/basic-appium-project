@@ -30,6 +30,23 @@ class BeermatTest : AppiumTestSetup() {
     }
 
     @Test
+    fun checkPriceCorrectionForSpecificAmountOfBeers() {
+        val expectedAmount = 4
+        val expectedTotalPrice = "10,00"
+
+        beermat {
+            insertNewPrice("2,50")
+            addBeers(5)
+            deleteBeers(1)
+        }
+
+        expect {
+            that(beermat.getAmount()).isEqualTo(expectedAmount)
+            that(beermat.getTotalPrice()).isEqualTo(expectedTotalPrice)
+        }
+    }
+
+    @Test
     fun checkSnackBarUpdateForAddingBeers() {
         beermat {
             addBeers(16)
