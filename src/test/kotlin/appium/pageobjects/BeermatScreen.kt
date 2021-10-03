@@ -50,7 +50,9 @@ class BeermatScreen : AbstractScreen() {
 
     fun getAmount() = getText(amount).toInt()
 
-    fun getSnackBarText() =getText(snackBar)
+    fun getSnackBarText() = getText(snackBar)
+
+    fun getDrinkName() = getText(itemName)
 
     fun getTotalPrice() = getText(totalPrice).replace("[^0-9]€".toRegex(), "")
 }

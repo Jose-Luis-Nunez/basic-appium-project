@@ -64,4 +64,13 @@ class BeermatTest : AppiumTestSetup() {
 
         assertThat(beermat.getSnackBarText()).contains("Booo")
     }
+
+    @Test
+    fun checkTextField() {
+        beermat {
+            enterDrinkName("Cola")
+        }
+
+        assertThat(beermat.getDrinkName()).contains("Cola")
+    }
 }
