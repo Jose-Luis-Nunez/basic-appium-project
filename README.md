@@ -55,12 +55,15 @@ class StartPageTest : AppiumTestSetup() {
         val expectedAmount = 4
         val expectedTotalPrice = "10,00"
 
-        with(startPage) {
+        startPage {
             insertNewPrice("2,50")
             addBeers(4)
         }
-        assertThat(startPage.getAmount()).isEqualTo(expectedAmount)
-        assertThat(startPage.getTotalPrice()).isEqualTo(expectedTotalPrice)
+        
+        expect {
+            that(startPage.getAmount()).isEqualTo(expectedAmount)
+            that(startPage.getTotalPrice()).isEqualTo(expectedTotalPrice)
+        }
     }
 }
 
