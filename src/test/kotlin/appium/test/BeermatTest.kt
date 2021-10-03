@@ -54,6 +54,7 @@ class BeermatTest : AppiumTestSetup() {
 
         assertThat(beermat.getSnackBarText()).contains("drunk")
     }
+
     @Test
     fun checkMaxSnackBarUpdateForAddingBeers() {
         beermat {
