@@ -24,7 +24,7 @@ class Android : Platform {
             setCapability(PLATFORM_NAME, "Android")
             setCapability(AUTOMATION_NAME, "UiAutomator2")
             setCapability(DEVICE_NAME, "Android Emulator")
-            setCapability(FULL_RESET, true)
+            //setCapability(FULL_RESET, true)
             setCapability(APP, getTestAppPath())
         }
     }

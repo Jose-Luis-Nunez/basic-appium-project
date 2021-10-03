@@ -3,7 +3,7 @@ package appium.pageobjects
 import io.appium.java_client.pagefactory.AndroidFindBy
 import org.fluentlenium.core.domain.FluentWebElement
 
-class StartPage : AbstractScreen() {
+class Beermat : AbstractScreen() {
     @AndroidFindBy(id = "tv_beer")
     private lateinit var itemName: FluentWebElement
 
@@ -25,6 +25,9 @@ class StartPage : AbstractScreen() {
     @AndroidFindBy(id = "fab")
     private lateinit var fab: FluentWebElement
 
+    @AndroidFindBy(id = "snackbar_text")
+    private lateinit var snackBar: FluentWebElement
+
     fun addBeers(amount: Int) {
         for (i in 2..amount) {
             clickOnElement(addBeerButton)
@@ -36,6 +39,8 @@ class StartPage : AbstractScreen() {
     }
 
     fun getAmount() = getText(amount).toInt()
+
+    fun getSnackBarText() =getText(snackBar)
 
     fun getTotalPrice() = getText(totalPrice).replace("[^0-9]€".toRegex(), "")
 }
