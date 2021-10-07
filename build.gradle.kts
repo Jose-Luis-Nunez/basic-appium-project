@@ -17,7 +17,7 @@ dependencies {
     val seleniumVersion = "3.141.59"
     val assertjVersion = "3.6.1"
     val appiumVersion = "7.4.1"
-    val jUnitVersion = "5.5.2"
+    val jUnitVersion = "4.12"
 
     testImplementation(
         group = "org.junit.jupiter",
