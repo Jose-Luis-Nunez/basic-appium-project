@@ -182,4 +182,3 @@ abstract class AbstractScreen : FluentPage() {
         UP, DOWN, LEFT, RIGHT
     }
 }
-
