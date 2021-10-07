@@ -32,6 +32,7 @@ class BeermatTest : AppiumTestSetup() {
         service = AppiumDriverLocalService.buildService(builder)
         service?.start()
     }
+
     @Page
     lateinit var beermat: BeermatScreen
 
