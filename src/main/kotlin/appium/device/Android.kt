@@ -21,6 +21,7 @@ class Android : Platform {
             setCapability("language", "de")
             setCapability("newCommandTimeout", 120)
             setCapability("disableWindowAnimation", true)
+            setCapability("avd","emulator2")
             setCapability(PLATFORM_NAME, "Android")
             setCapability(AUTOMATION_NAME, "UiAutomator2")
             setCapability(DEVICE_NAME, "Android Emulator")
