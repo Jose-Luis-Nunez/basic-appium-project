@@ -11,6 +11,7 @@ import org.fluentlenium.assertj.custom.FluentWebElementAssert
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
+import org.junit.runner.RunWith
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.slf4j.LoggerFactory
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeUnit
 
 private const val APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub"
 
+@RunWith(Parallelized::class)
 open class AppiumTestSetup : FluentTest() {
 
     private val platform: Platform = Android()
