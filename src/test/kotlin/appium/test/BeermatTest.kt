@@ -2,36 +2,13 @@ package appium.test
 
 import appium.pageobjects.BeermatScreen
 import appium.utils.AppiumTestSetup
-import io.appium.java_client.service.local.AppiumDriverLocalService
-import io.appium.java_client.service.local.AppiumServiceBuilder
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.fluentlenium.core.annotation.Page
-import org.junit.AfterClass
-import org.junit.BeforeClass
 import org.junit.jupiter.api.Test
 import strikt.api.expect
 import strikt.assertions.isEqualTo
-import java.io.File
-import java.util.*
-
 
 class BeermatTest : AppiumTestSetup() {
-    private var service: AppiumDriverLocalService? = null
-
-    @BeforeClass
-    fun startAppiumServer() {
-        val builder = AppiumServiceBuilder()
-        builder.usingAnyFreePort()
-        // Tell builder where node is installed. Or set this path in an environment variable named NODE_PATH
-        builder.usingDriverExecutable(File("path_to_node"))
-        // Tell builder where Appium is installed. Or set this path in an environment variable named APPIUM_PATH
-        builder.withAppiumJS(File("appium"))
-        val environment:HashMap<String,String> = HashMap<String,String>()
-        environment["PATH"] = "/usr/local/bin:" + System.getenv("PATH")
-        builder.withEnvironment(environment)
-        service = AppiumDriverLocalService.buildService(builder)
-        service?.start()
-    }
 
     @Page
     lateinit var beermat: BeermatScreen
@@ -95,10 +72,5 @@ class BeermatTest : AppiumTestSetup() {
         }
 
         assertThat(beermat.getDrinkName()).contains("Cola")
-    }
-
-    @AfterClass
-    fun stopAppiumServer() {
-        service?.stop()
     }
 }
