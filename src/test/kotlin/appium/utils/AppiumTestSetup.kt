@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit
 
 private const val APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub"
 
-@RunWith(Parallelized::class)
 open class AppiumTestSetup : FluentTest() {
 
     private val platform: Platform = Android()
