@@ -20,8 +20,8 @@ dependencies {
     val jUnitVersion = "4.12"
 
     testImplementation(
-        group = "org.junit.jupiter",
-        name = "junit-jupiter",
+        group = "junit",
+        name = "junit",
         version = jUnitVersion
     )
     testImplementation(
