@@ -4,6 +4,9 @@ import appium.pageobjects.AbstractScreen
 import io.appium.java_client.pagefactory.AndroidFindBy
 import org.fluentlenium.core.domain.FluentWebElement
 
+private const val START_ADD_BEERS = 2
+private const val START_DELETE_BEERS = 1
+
 class BeermatScreen : AbstractScreen() {
     @AndroidFindBy(id = "tv_beer")
     private lateinit var itemName: FluentWebElement
@@ -33,6 +36,10 @@ class BeermatScreen : AbstractScreen() {
     }
 
     fun deleteBeers(numberOfBeers: Int) {
+        loop(START_DELETE_BEERS, numberOfBeers)
+    }
+
+    private fun loop(start: Int, numberOfBeers: Int) {
         for (i in 1..numberOfBeers) {
             clickOnElement(removeBeerButton)
         }
