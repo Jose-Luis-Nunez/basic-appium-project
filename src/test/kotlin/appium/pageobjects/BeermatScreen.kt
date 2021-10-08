@@ -22,9 +22,6 @@ class BeermatScreen : AbstractScreen() {
     @AndroidFindBy(id = "tv_total_price_of_line")
     private lateinit var totalPrice: FluentWebElement
 
-    @AndroidFindBy(id = "fab")
-    private lateinit var fab: FluentWebElement
-
     @AndroidFindBy(id = "snackbar_text")
     private lateinit var snackBar: FluentWebElement
 
