@@ -25,14 +25,14 @@ class BeermatScreen : AbstractScreen() {
     @AndroidFindBy(id = "snackbar_text")
     private lateinit var snackBar: FluentWebElement
 
-    fun addBeers(amount: Int) {
-        for (i in 2..amount) {
+    fun addBeers(numberOfBeers: Int) {
+        for (i in 2..numberOfBeers) {
             clickOnElement(addBeerButton)
         }
     }
 
-    fun deleteBeers(amount: Int) {
-        for (i in 1..amount) {
+    fun deleteBeers(numberOfBeers: Int) {
+        for (i in 1..numberOfBeers) {
             clickOnElement(removeBeerButton)
         }
     }
