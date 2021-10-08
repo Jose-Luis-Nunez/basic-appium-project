@@ -17,6 +17,8 @@ open class AppiumTestSetup : TestDsl() {
 
     private val platform: Platform = Android()
 
+    override fun getCapabilities() = platform.getCapabilities()!!
+
     override fun newWebDriver(): WebDriver {
         log.info("Running test on Appium server {} using {}", APPIUM_SERVER_URL, platform)
         return runTestOnAppiumServer()
@@ -31,9 +33,6 @@ open class AppiumTestSetup : TestDsl() {
             throw ConfigException("Invalid hub location: $APPIUM_SERVER_URL", e)
         }
     }
-
-    override fun getCapabilities() = platform.getCapabilities()!!
-
     companion object {
         private val log = LoggerFactory.getLogger(AppiumTestSetup::class.java)
     }
