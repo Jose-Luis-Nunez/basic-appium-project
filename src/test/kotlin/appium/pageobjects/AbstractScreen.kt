@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.html5.Location
 import java.time.Duration.ofMillis
 
-class AbstractScreen : WaitsFunctions() {
+abstract class AbstractScreen : WaitsFunctions() {
 
     fun swipeFromTo(from: FluentWebElement, to: FluentWebElement) {
         swipe(
@@ -56,7 +56,7 @@ class AbstractScreen : WaitsFunctions() {
     class PlatformTouchAction(performsTouchActions: PerformsTouchActions) :
             TouchAction<PlatformTouchAction>(performsTouchActions)
 
-    fun hideKeyBoard() {
+    private fun hideKeyBoard() {
         (driver as AppiumDriver<*>).hideKeyboard()
     }
 

@@ -1,5 +1,6 @@
-package appium.pageobjects
+package appium.pageobjects.beermat
 
+import appium.pageobjects.AbstractScreen
 import io.appium.java_client.pagefactory.AndroidFindBy
 import org.fluentlenium.core.domain.FluentWebElement
 

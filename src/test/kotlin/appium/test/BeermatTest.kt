@@ -1,6 +1,6 @@
 package appium.test
 
-import appium.pageobjects.BeermatScreen
+import appium.pageobjects.beermat.BeermatScreen
 import appium.utils.AppiumTestSetup
 import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.fluentlenium.core.annotation.Page
