@@ -40,9 +40,7 @@ class BeermatScreen : AbstractScreen() {
 
     fun insertNewPrice(newPrice: String) = price.type(newPrice)
 
-    fun enterDrinkName(drink: String) {
-        itemName.type(drink)
-    }
+    fun enterDrinkName(drink: String) = itemName.type(drink)
 
     fun getAmount() = getText(amount).toInt()
 
