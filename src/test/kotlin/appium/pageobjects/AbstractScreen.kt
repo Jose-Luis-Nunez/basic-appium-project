@@ -1,23 +1,17 @@
 package appium.pageobjects
 
-import appium.pageobjects.AbstractScreen.Direction.*
-import appium.utils.CityUtils
 import appium.utils.CityUtils.*
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.PerformsTouchActions
 import io.appium.java_client.TouchAction
 import io.appium.java_client.touch.WaitOptions.waitOptions
-import io.appium.java_client.touch.offset.PointOption
 import io.appium.java_client.touch.offset.PointOption.point
-import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.html5.Location
 import java.time.Duration.ofMillis
-import java.util.concurrent.TimeUnit
 
-
-abstract class AbstractScreen : FluentPage() {
+class AbstractScreen : WaitsFunctions() {
 
     fun swipeFromTo(from: FluentWebElement, to: FluentWebElement) {
         swipe(
@@ -95,79 +89,6 @@ abstract class AbstractScreen : FluentPage() {
 
     fun getText(fluentWebElement: FluentWebElement) = fluentWebElement.text()!!
 
-    fun waitUntilElementPresent(element: FluentWebElement) {
-        await().atMost(30, TimeUnit.SECONDS).until(element).present()
-    }
-
-    fun waitUntilElementPresent(element: FluentWebElement, wait: Long) {
-        await().atMost(wait, TimeUnit.SECONDS).until(element).present()
-    }
-
-    fun waitUntilElementNotPresent(element: FluentWebElement) {
-        await().atMost(10, TimeUnit.SECONDS).until(element).not().present()
-    }
-
-    fun waitUntilElementDisplayed(element: FluentWebElement) {
-        await().atMost(30, TimeUnit.SECONDS).until(element).displayed()
-    }
-
-    fun waitUntilElementDisplayed(element: FluentWebElement, wait: Long) {
-        await().atMost(wait, TimeUnit.SECONDS).until(element).displayed()
-    }
-
-    fun waitUntilElementNotDisplayed(element: FluentWebElement) {
-        await().atMost(10, TimeUnit.SECONDS).until(element).not().displayed()
-    }
-
-    fun waitUntilElementClickable(element: FluentWebElement) {
-        await().atMost(30, TimeUnit.SECONDS).until(element).clickable()
-    }
-
-    fun waitUntilElementNotContainsText(element: FluentWebElement, text: String) {
-        await().atMost(10, TimeUnit.SECONDS).until(element).text().not().contains(text)
-    }
-
-    fun waitUntilElementContainsText(element: FluentWebElement, text: String) {
-        await().atMost(10, TimeUnit.SECONDS).until(element).text().contains(text)
-    }
-
-    fun swipeScreen(direction: Direction) {
-        println("swipeScreen(): dir: '$direction'") // always log your actions
-
-        val animationTime = 200L // ms
-        val edgeBorder = 10 // better avoid edges
-        val pointOptionStart: PointOption<*>
-        val pointOptionEnd: PointOption<*>
-
-        // init screen variables
-        val dimension = driver.manage().window().size
-
-        // init start point = center of screen
-        pointOptionStart = point(dimension.width / 2, dimension.height / 2)
-        pointOptionEnd = when (direction) {
-            DOWN -> point(dimension.width / 2, dimension.height - edgeBorder)
-            UP -> point(dimension.width / 2, edgeBorder)
-            LEFT -> point(edgeBorder, dimension.height / 2)
-            RIGHT -> point(dimension.width - edgeBorder, dimension.height / 2)
-        }
-        // execute swipe using TouchAction
-        try {
-            PlatformTouchAction(driver as PerformsTouchActions)
-                    .press(pointOptionStart)
-                    .waitAction(waitOptions(ofMillis(2000L)))
-                    .moveTo(pointOptionEnd)
-                    .release().perform()
-        } catch (e: Exception) {
-            System.err.println("swipeScreen(): TouchAction FAILED${e.message}")
-            return
-        }
-        // always allow swipe action to complete
-        try {
-            Thread.sleep(animationTime)
-        } catch (e: InterruptedException) {
-        }
-    }
-
     fun hideNavigationBar() {
         val example = listOf("overscan", "0,0,0,-202")
         val adbCommand = mapOf("command" to "wm", "args" to example)
@@ -176,9 +97,5 @@ abstract class AbstractScreen : FluentPage() {
 
     fun removeWhiteSpacesFromString(str: String): String {
         return str.replace("\\s".toRegex(), "")
-    }
-
-    enum class Direction {
-        UP, DOWN, LEFT, RIGHT
     }
 }
