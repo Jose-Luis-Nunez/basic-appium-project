@@ -33,7 +33,9 @@ class BeermatScreen : AbstractScreen() {
     }
 
     fun deleteBeers(numberOfBeers: Int) {
-        //loop(numberOfBeers)
+        for (i in 1..numberOfBeers) {
+            clickOnElement(addBeerButton)
+        }
     }
 
     fun insertNewPrice(newPrice: String) = price.type(newPrice)
