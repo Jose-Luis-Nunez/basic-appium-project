@@ -4,14 +4,6 @@ import appium.config.ConfigException
 import appium.device.Android
 import appium.device.Platform
 import io.appium.java_client.AppiumDriver
-import org.fluentlenium.adapter.junit.jupiter.FluentTest
-import org.fluentlenium.assertj.FluentLeniumAssertions
-import org.fluentlenium.assertj.custom.FluentListAssert
-import org.fluentlenium.assertj.custom.FluentWebElementAssert
-import org.fluentlenium.core.FluentPage
-import org.fluentlenium.core.domain.FluentList
-import org.fluentlenium.core.domain.FluentWebElement
-import org.junit.runner.RunWith
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.slf4j.LoggerFactory
@@ -21,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 private const val APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub"
 
-open class AppiumTestSetup : FluentTest() {
+open class AppiumTestSetup : TestDsl() {
 
     private val platform: Platform = Android()
 
@@ -44,25 +36,5 @@ open class AppiumTestSetup : FluentTest() {
 
     companion object {
         private val log = LoggerFactory.getLogger(AppiumTestSetup::class.java)
-    }
-
-    inline operator fun <reified T : FluentPage> T.invoke(func: T.() -> Unit) = with(T::class) {
-        apply { func() }
-    }
-
-    fun FluentWebElement.assertThat(init: FluentWebElementAssert.() -> Unit) {
-        FluentLeniumAssertions.assertThat(this).init()
-    }
-
-    fun FluentList<FluentWebElement>.assert(init: FluentListAssert.() -> Unit) {
-        FluentLeniumAssertions.assertThat(this).init()
-    }
-
-    operator fun FluentWebElement.invoke(init: FluentWebElementAssert.() -> Unit) {
-        FluentLeniumAssertions.assertThat(this).init()
-    }
-
-    fun assertThat(func: FluentPage.() -> Unit = {}) {
-        FluentPage().func()
     }
 }
