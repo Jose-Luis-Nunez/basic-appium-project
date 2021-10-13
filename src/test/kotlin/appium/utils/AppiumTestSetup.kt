@@ -33,6 +33,7 @@ open class AppiumTestSetup : TestDsl() {
             throw ConfigException("Invalid hub location: $APPIUM_SERVER_URL", e)
         }
     }
+
     companion object {
         private val log = LoggerFactory.getLogger(AppiumTestSetup::class.java)
     }
