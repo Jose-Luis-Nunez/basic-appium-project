@@ -34,7 +34,7 @@ class BeermatScreen : AbstractScreen() {
 
     fun deleteBeers(numberOfBeers: Int) {
         for (i in 1..numberOfBeers) {
-            clickOnElement(addBeerButton)
+            clickOnElement(removeBeerButton)
         }
     }
 
