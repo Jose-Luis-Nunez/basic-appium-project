@@ -1,8 +1,8 @@
 package appium.utils
 
 import appium.config.ConfigException
-import appium.device.Android
-import appium.device.Platform
+import appium.platform.Android
+import appium.platform.Platform
 import io.appium.java_client.AppiumDriver
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement

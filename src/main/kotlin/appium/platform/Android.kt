@@ -1,4 +1,4 @@
-package appium.device
+package appium.platform
 
 import appium.utils.PropertiesReader
 import io.appium.java_client.remote.MobileCapabilityType.AUTOMATION_NAME

@@ -1,4 +1,4 @@
-package appium.device
+package appium.platform
 
 import org.openqa.selenium.Capabilities
 
