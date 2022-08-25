@@ -19,6 +19,8 @@ To run the tests locally:
 `emulator -list-avds`
 #### Start specific emulator
 `emulator -avd [emulator name]`
+### run tests with java 11
+`to avoid issues use java 11 for the project`
 
 ## Write tests
 #### Create Page Object 

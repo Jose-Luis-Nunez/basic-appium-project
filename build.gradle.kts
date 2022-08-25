@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.20-M1"
+    kotlin("jvm") version "1.7.10"
 }
 
 group = "me.josenunez"
@@ -16,8 +16,8 @@ dependencies {
     val fluentleniumVersion = "4.5.1"
     val seleniumVersion = "3.141.59"
     val assertjVersion = "3.6.1"
-    val appiumVersion = "7.4.1"
-    val jUnitVersion = "4.12"
+    val appiumVersion = "7.6.0"
+    val jUnitVersion = "4.13.1"
 
     testImplementation(
         group = "junit",
@@ -69,15 +69,16 @@ dependencies {
             name = "rest-assured",
             version = "4.4.0"
     )
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {
     withType<Test> {
         useJUnitPlatform()
     }
+}
 
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
+kotlin {
+    jvmToolchain {
+        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of("11"))
     }
 }

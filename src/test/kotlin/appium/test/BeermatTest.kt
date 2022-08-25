@@ -2,10 +2,10 @@ package appium.test
 
 import appium.pageobjects.beermat.BeermatScreen
 import appium.utils.AppiumTestSetup
-import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.fluentlenium.core.annotation.Page
 import org.junit.jupiter.api.Test
 import strikt.api.expect
+import strikt.assertions.contains
 import strikt.assertions.isEqualTo
 
 class BeermatTest : AppiumTestSetup() {
@@ -52,7 +52,9 @@ class BeermatTest : AppiumTestSetup() {
             addBeers(16)
         }
 
-        assertThat(beermat.getSnackBarText()).contains("drunk")
+        expect {
+            that(beermat.getSnackBarText()).contains("drunk")
+        }
     }
 
     @Test
@@ -62,7 +64,9 @@ class BeermatTest : AppiumTestSetup() {
             deleteBeers(2)
         }
 
-        assertThat(beermat.getSnackBarText()).contains("Booo")
+        expect {
+            that(beermat.getSnackBarText()).contains("Booo")
+        }
     }
 
     @Test
@@ -71,6 +75,8 @@ class BeermatTest : AppiumTestSetup() {
             enterDrinkName("Cola")
         }
 
-        assertThat(beermat.getDrinkName()).contains("Cola")
+        expect {
+            that(beermat.getDrinkName()).contains("Cola")
+        }
     }
 }
