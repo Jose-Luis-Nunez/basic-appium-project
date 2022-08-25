@@ -13,7 +13,7 @@ import java.io.File
 
 class Android : Platform {
 
-    override fun getCapabilities(): Capabilities? {
+    override fun getCapabilities(): Capabilities {
         return DesiredCapabilities().apply {
             setCapability("autoGrantPermissions", true)
             setCapability("gpsEnabled", true)
